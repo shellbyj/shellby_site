@@ -22,30 +22,6 @@ menu = &amp;quot;main&amp;quot;  Lorem ipsum dolor sit amet, consectetur adipisc
     </item>
     
     <item>
-      <title>Go is for lovers</title>
-      <link>/blog/2015/09/17/go-is-for-lovers/</link>
-      <pubDate>Thu, 17 Sep 2015 13:47:08 +0200</pubDate>
-      
-      <guid>/blog/2015/09/17/go-is-for-lovers/</guid>
-      <description>Hugo uses the excellent go html/template library for its template engine. It is an extremely lightweight engine that provides a very small amount of logic. In our experience that it is just the right amount of logic to be able to create a good static website. If you have used other template systems from different languages or frameworks you will find a lot of similarities in go templates.
-This document is a brief primer on using go templates.</description>
-    </item>
-    
-    <item>
-      <title>Hugo is for lovers</title>
-      <link>/blog/2015/08/03/hugo-is-for-lovers/</link>
-      <pubDate>Mon, 03 Aug 2015 13:39:46 +0200</pubDate>
-      
-      <guid>/blog/2015/08/03/hugo-is-for-lovers/</guid>
-      <description>Step 1. Install Hugo Goto hugo releases and download the appropriate version for your os and architecture.
-Save it somewhere specific as we will be using it in the next step.
-More complete instructions are available at installing hugo
-Step 2. Build the Docs Hugo has its own example site which happens to also be the documentation site you are reading right now.
-Follow the following steps:
- Clone the hugo repository Go into the repo Run hugo in server mode and build the docs Open your browser to http://localhost:1313  Corresponding pseudo commands:</description>
-    </item>
-    
-    <item>
       <title>Hello R Markdown</title>
       <link>/blog/2015/07/23/2015-07-23-r-rmarkdown/</link>
       <pubDate>Thu, 23 Jul 2015 21:13:14 -0500</pubDate>
@@ -57,24 +33,41 @@ summary(cars)## speed dist ## Min. : 4.0 Min. : 2.00 ## 1st Qu.:12.0 1st Qu.: 2
     </item>
     
     <item>
-      <title>Creating a new theme</title>
-      <link>/blog/2015/06/24/creating-a-new-theme/</link>
-      <pubDate>Wed, 24 Jun 2015 13:50:46 +0200</pubDate>
+      <title>Population Growth Rates</title>
+      <link>/blog/1/01/01/per-capita-growth-rate/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>/blog/2015/06/24/creating-a-new-theme/</guid>
-      <description>Introduction This tutorial will show you how to create a simple theme in Hugo. I assume that you are familiar with HTML, the bash command line, and that you are comfortable using Markdown to format content. I&#39;ll explain how Hugo uses templates and how you can organize your templates to create a theme. I won&#39;t cover using CSS to style your theme.
-We&#39;ll start with creating a new site with a very basic template.</description>
+      <guid>/blog/1/01/01/per-capita-growth-rate/</guid>
+      <description>1. Calculate dN/NdtAnnual population data provides some initial population size at some year (t) and subsequent population sizes for each year afterwards. With these quantities, you can calculate the logistic per capita growth rate of a population when you take the natural log of the population size (at one year in the future) divided by the initial population size.
+Manual Calculation of dN/Ndt from 1963-1964 for each of the 5 countries.</description>
     </item>
     
     <item>
-      <title>Migrate from Jekyll</title>
-      <link>/blog/1/01/01/migrate-from-jekyll/</link>
+      <title>Snowshoe Hare Physical Data</title>
+      <link>/blog/1/01/01/snowshoe-hare-age/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>/blog/1/01/01/migrate-from-jekyll/</guid>
-      <description>Move static content to static Jekyll has a rule that any directory not starting with _ will be copied as-is to the _site output. Hugo keeps all static content under static. You should therefore move it all there. With Jekyll, something that looked like
-▾ &amp;lt;root&amp;gt;/ ▾ images/ logo.png  should become
-▾ &amp;lt;root&amp;gt;/ ▾ static/ ▾ images/ logo.png  Additionally, you&#39;ll want any files that should reside at the root (such as CNAME) to be moved to static.</description>
+      <guid>/blog/1/01/01/snowshoe-hare-age/</guid>
+      <description>library(tidyverse)library(janitor)library(kableExtra)library(here)library(dplyr)library(stargazer)###Read in Datasnowshoe &amp;lt;- read.csv(&amp;quot;showshoe_lter.csv&amp;quot;)This markdown document contains code that explores Snowshoe hare (Lepus americanus) data collected in Bonanza Creek Experimental Forest. Data was collected from 1999-2012 and obtained from the Long Term Ecological Research portal.I’m interested in seeing if there is a relationship between age and snowshoe hare weight (g) and hindfoot value (metadata indicated that this variable was a dimensionless real number).</description>
+    </item>
+    
+    <item>
+      <title>Spatial R</title>
+      <link>/blog/1/01/01/spatial-r-take-home-week-4/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/blog/1/01/01/spatial-r-take-home-week-4/</guid>
+      <description>library(tidyverse)## Warning: package &amp;#39;tidyverse&amp;#39; was built under R version 3.5.3## -- Attaching packages ---------------------------------------------------------- tidyverse 1.3.0 --## &amp;lt;U+2713&amp;gt; ggplot2 3.2.1 &amp;lt;U+2713&amp;gt; purrr 0.3.3## &amp;lt;U+2713&amp;gt; tibble 2.1.3 &amp;lt;U+2713&amp;gt; dplyr 0.8.3## &amp;lt;U+2713&amp;gt; tidyr 1.0.0 &amp;lt;U+2713&amp;gt; stringr 1.4.0## &amp;lt;U+2713&amp;gt; readr 1.3.1 &amp;lt;U+2713&amp;gt; forcats 0.4.0## Warning: package &amp;#39;ggplot2&amp;#39; was built under R version 3.5.3## Warning: package &amp;#39;tibble&amp;#39; was built under R version 3.</description>
+    </item>
+    
+    <item>
+      <title>Vegetable Nutrients PCA</title>
+      <link>/blog/1/01/01/vegetable-nutrients-pca/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/blog/1/01/01/vegetable-nutrients-pca/</guid>
+      <description>library(tidyverse)library(here)library(janitor)library(naniar)library(VIM)library(skimr)library(ggfortify)credit: yahoo!Finance
+This markdown document contains code that explores nutritional variables related to vegetables and vegetable products. Data was sourced from the USDA National Nutrient Database (also known as Food Data Central). I will be exploring the correlation between several nutrients within this particular food group (i.e. energy, vitamin A, carbohydrates, etc). To explore this, a principal components Analysis (PCA) was completed.</description>
     </item>
     
   </channel>

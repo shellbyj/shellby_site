@@ -28,12 +28,12 @@
   </url>
   
   <url>
-    <loc>/tags/programming/</loc>
+    <loc>/categories/programming/</loc>
     <lastmod>2015-10-02T21:49:20+02:00</lastmod>
   </url>
   
   <url>
-    <loc>/categories/programming/</loc>
+    <loc>/tags/programming/</loc>
     <lastmod>2015-10-02T21:49:20+02:00</lastmod>
   </url>
   
@@ -50,26 +50,6 @@
   <url>
     <loc>/tags/theme/</loc>
     <lastmod>2015-10-02T21:49:20+02:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/tags/go/</loc>
-    <lastmod>2015-09-17T13:47:08+02:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/blog/2015/09/17/go-is-for-lovers/</loc>
-    <lastmod>2015-09-17T13:47:08+02:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/blog/2015/08/03/hugo-is-for-lovers/</loc>
-    <lastmod>2015-08-03T13:39:46+02:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/categories/pseudo/</loc>
-    <lastmod>2015-08-03T13:39:46+02:00</lastmod>
   </url>
   
   <url>
@@ -98,16 +78,6 @@
   </url>
   
   <url>
-    <loc>/blog/2015/06/24/creating-a-new-theme/</loc>
-    <lastmod>2015-06-24T13:50:46+02:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/categories/starting/</loc>
-    <lastmod>2015-06-24T13:50:46+02:00</lastmod>
-  </url>
-  
-  <url>
     <loc>/contact/</loc>
   </url>
   
@@ -116,15 +86,19 @@
   </url>
   
   <url>
-    <loc>/tags/ipsum/</loc>
+    <loc>/blog/1/01/01/per-capita-growth-rate/</loc>
   </url>
   
   <url>
-    <loc>/categories/lorem/</loc>
+    <loc>/blog/1/01/01/snowshoe-hare-age/</loc>
   </url>
   
   <url>
-    <loc>/blog/1/01/01/migrate-from-jekyll/</loc>
+    <loc>/blog/1/01/01/spatial-r-take-home-week-4/</loc>
+  </url>
+  
+  <url>
+    <loc>/blog/1/01/01/vegetable-nutrients-pca/</loc>
   </url>
   
 </urlset>

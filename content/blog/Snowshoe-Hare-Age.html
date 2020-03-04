@@ -1,0 +1,278 @@
+---
+title: "Snowshoe Hare Physical Data"
+author: "Shellby Johnson"
+date: "February 4, 2020"
+output: html_document
+categories: ["R"]
+tags: ["R Markdown", "plot", "regression"]
+---
+
+<script src="/rmarkdown-libs/kePrint/kePrint.js"></script>
+
+
+<pre class="r"><code>library(tidyverse)
+library(janitor)
+library(kableExtra)
+library(here)
+library(dplyr)
+library(stargazer)
+
+
+###Read in Data
+
+snowshoe &lt;- read.csv(&quot;showshoe_lter.csv&quot;)</code></pre>
+<div id="this-markdown-document-contains-code-that-explores-snowshoe-hare-lepus-americanus-data-collected-in-bonanza-creek-experimental-forest.-data-was-collected-from-1999-2012-and-obtained-from-the-long-term-ecological-research-portal." class="section level4">
+<h4>This markdown document contains code that explores Snowshoe hare (Lepus americanus) data collected in Bonanza Creek Experimental Forest. Data was collected from 1999-2012 and obtained from the Long Term Ecological Research portal.</h4>
+</div>
+<div id="im-interested-in-seeing-if-there-is-a-relationship-between-age-and-snowshoe-hare-weight-g-and-hindfoot-value-metadata-indicated-that-this-variable-was-a-dimensionless-real-number.-to-explore-this-i-used-a-simple-binary-logistic-regression.-i-also-created-a-graph-to-visualize-this-relationship-and-a-summarized-table-of-mean-weight-and-hindfoot-value-for-adults-and-juveniles." class="section level4">
+<h4>I’m interested in seeing if there is a relationship between age and snowshoe hare weight (g) and hindfoot value (metadata indicated that this variable was a dimensionless real number). To explore this, I used a simple binary logistic regression. I also created a graph to visualize this relationship and a summarized table of mean weight and hindfoot value for adults and juveniles.</h4>
+<p>Study citation: Kielland K., F. S. Chapin, R. W. Ruess. 2017. Snowshoe hare physical data in Bonanza Creek Experimental Forest: 1999-Present. Environmental Data Initiative. <a href="https://doi.org/10.6073/pasta/03dce4856d79b91557d8e6ce2cbcdc14" class="uri">https://doi.org/10.6073/pasta/03dce4856d79b91557d8e6ce2cbcdc14</a>.</p>
+<div class="figure">
+<img src="images/snowshoe_hare.jpg" alt="credit: cottagelife.com (courtesy of Jim Cumming/Shutterstock)" />
+<p class="caption">credit: cottagelife.com (courtesy of Jim Cumming/Shutterstock)</p>
+</div>
+<hr />
+<pre class="r"><code>###First,choose only the observations (rows) that have &quot;j&quot; and &quot;a&quot; indicated as the age of the snowshoe hare. Make new column, Age, with &#39;j&#39; and &#39;a&#39; in uppercase format.
+
+snowshoe_j_a &lt;- snowshoe %&gt;% 
+  mutate(Age = str_to_upper(age)) %&gt;% 
+  filter(Age == &quot;J&quot;| Age == &quot;A&quot;)</code></pre>
+<center>
+<pre class="r"><code># Visualizing the data of interest before running the BLR model. This allows me to make some conceptual conclusions that I expect to make sense with the statistical ones in the model.
+
+
+ggplot(snowshoe_j_a, aes(x = weight, y = hindft)) +
+  geom_point(size = 1, alpha = 1,
+  aes(color = Age))+
+  facet_wrap(~Age)+
+  theme_minimal()+
+  theme(plot.title = element_text(hjust = 0.5, face = &quot;bold&quot;))+
+  ggtitle(&quot;Snowshoe Hare Age Based on Weight and Hind Foot&quot;)+ 
+  labs( x = &quot;Weight (g)&quot;,
+        y = &quot;Hind Foot Value&quot;)</code></pre>
+<p><img src="/blog/Snowshoe-Hare-Age_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
+<p>&lt;&gt;</p>
+<p><strong>Figure 1.</strong> Physical Snowshoe Hare data showing weight (grams) and hind foot values for adult and juvenile hares. Where A is “adult” and J is “juvenile”.</p>
+<hr />
+<pre class="r"><code>#Before running the BLR model, I will manually set the reference levels. Since this is a dichotomous outcome variable, J(juvenile) will be set to (1) and A (adult) will be set to (0). 
+
+snowshoe_bin &lt;- snowshoe_j_a %&gt;% 
+  mutate(
+    age_binary = case_when(
+      Age == &quot;A&quot; ~ 0,
+      Age == &quot;J&quot; ~ 1
+
+    )
+  )</code></pre>
+<pre class="r"><code>#Running the BLR model:
+
+
+snowshoe_blr &lt;- glm(age_binary ~ weight + hindft,
+                   family = binomial,
+                   data = snowshoe_bin)
+
+summary(snowshoe_blr)</code></pre>
+<div align="center">
+<pre class="r"><code>#Use stargazer to put model results in a neat table. And round coefficients to 5 digits since they are similar. Without rounding the values will look the same.
+
+stargazer(snowshoe_blr, type = &#39;html&#39;, digits = 5,
+          title = &quot;Table 1. Snowshoe hare Binary Logistic Regression Results. The model (Age = - 0.00791(weight) - 0.00780(hindft) explains a significant amount of variance in the probability of hare age based on weight and hindfoot value.&quot;)</code></pre>
+<table style="text-align:center">
+<caption>
+<strong>Table 1. Snowshoe hare Binary Logistic Regression Results. The model (Age = - 0.00791(weight) - 0.00780(hindft) explains a significant amount of variance in the probability of hare age based on weight and hindfoot value.</strong>
+</caption>
+<tr>
+<td colspan="2" style="border-bottom: 1px solid black">
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+<em>Dependent variable:</em>
+</td>
+</tr>
+<tr>
+<td>
+</td>
+<td colspan="1" style="border-bottom: 1px solid black">
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+age_binary
+</td>
+</tr>
+<tr>
+<td colspan="2" style="border-bottom: 1px solid black">
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+weight
+</td>
+<td>
+-0.00791<sup>***</sup>
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+(0.00067)
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+hindft
+</td>
+<td>
+-0.00780
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+(0.01145)
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+Constant
+</td>
+<td>
+10.24346<sup>***</sup>
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+(1.60493)
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td colspan="2" style="border-bottom: 1px solid black">
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+Observations
+</td>
+<td>
+640
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+Log Likelihood
+</td>
+<td>
+-198.40110
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+Akaike Inf. Crit.
+</td>
+<td>
+402.80230
+</td>
+</tr>
+<tr>
+<td colspan="2" style="border-bottom: 1px solid black">
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+<em>Note:</em>
+</td>
+<td style="text-align:right">
+<sup><em></sup>p&lt;0.1; <sup><strong></sup>p&lt;0.05; <sup></strong></em></sup>p&lt;0.01
+</td>
+</tr>
+</table>
+</div>
+<hr />
+</div>
+<div id="the-probablility-of-a-snowshoe-hare-being-a-juvenile-decreases-as-there-is-a-1-unit-increase-in-weight-negative-coefficient-for-weight.-this-makes-sense-as-the-graph-implies-that-the-heavier-the-snowshoe-hare-is-in-grams-the-more-likely-that-a-snowshoe-hare-is-an-adult.-there-was-a-similar-result-for-hind-foot-value." class="section level4">
+<h4>The probablility of a snowshoe hare being a juvenile decreases as there is a 1 unit increase in weight (negative coefficient for weight). This makes sense as the graph implies that the heavier the Snowshoe hare is in grams, the more likely that a Snowshoe hare is an adult. There was a similar result for hind foot value.</h4>
+<hr />
+<p><strong>Table 2.</strong> Mean values for weight (g) and hind foot value for adult and juvenile Snowshoe hares. “A” represents adult and “J” respresents juvenile.</p>
+<pre class="r"><code>##I will find the mean weight and hindfoot value of adult hares and mean weight and hindfoot value of juvenile hares.
+
+age_summary &lt;- snowshoe_j_a %&gt;% 
+  group_by(Age) %&gt;% 
+  summarize(mean_weight = mean(weight, na.rm = TRUE),
+            mean_hindft = mean(hindft, na.rm = TRUE)) 
+
+#Transfer summary data into a kable table
+
+kable(age_summary,
+      col.names = c( &quot;Age&quot;,&quot;Mean Weight (g)&quot;,&quot;Mean Hind Foot&quot;)) %&gt;% 
+  kable_styling(bootstrap_options = &quot;striped&quot;,
+                full_width = FALSE)</code></pre>
+<table class="table table-striped" style="width: auto !important; margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:left;">
+Age
+</th>
+<th style="text-align:right;">
+Mean Weight (g)
+</th>
+<th style="text-align:right;">
+Mean Hind Foot
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+A
+</td>
+<td style="text-align:right;">
+1494.6535
+</td>
+<td style="text-align:right;">
+133.5699
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+J
+</td>
+<td style="text-align:right;">
+869.7861
+</td>
+<td style="text-align:right;">
+120.9216
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="mean-weight-for-adult-snowshoe-hares-was-around-1495-grams-and-mean-weight-for-juveniles-was-around-870-grams.-mean-hindfoot-value-for-adults-and-juveniles-was-around-134-and-121-respectively." class="section level4">
+<h4>Mean weight for adult Snowshoe hares was around 1495 grams, and mean weight for juveniles was around 870 grams. Mean hindfoot value for adults and juveniles was around 134 and 121 respectively.</h4>
+</div>

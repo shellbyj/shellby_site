@@ -1,0 +1,114 @@
+---
+title: "Vegetable Nutrients PCA"
+author: "Shellby Johnson"
+date: "February 4, 2020"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, message = FALSE, warning = FALSE, results = "hide")
+```
+
+```{r}
+
+library(tidyverse)
+library(here)
+library(janitor)
+library(naniar)
+library(VIM)
+library(skimr)
+library(ggfortify)
+
+```
+
+![credit: yahoo!Finance](images/veggies.jpg)
+
+
+####This markdown document contains code that explores nutritional variables related to vegetables and vegetable products. Data was sourced from the USDA National Nutrient Database (also known as Food Data Central). I will be exploring the correlation between several nutrients within this particular food group (i.e. energy, vitamin A, carbohydrates, etc). To explore this, a principal components Analysis (PCA) was completed.
+
+*******************
+
+
+```{r}
+
+#Read in data
+
+food_nutrients<- read_csv("usda_nutrients.csv")
+
+
+#Use unique() to see what all the possible food groups are listed in the dataset
+unique(food_nutrients$FoodGroup)
+
+#Clean up the column names and choose variables of interest (in this case, veggies): 
+
+veggies_clean <- food_nutrients %>% 
+  clean_names() %>% 
+  filter(food_group == "Vegetables and Vegetable Products") %>% 
+  select(energy_kcal:vit_c_mg)
+
+```
+
+*******************
+
+####Before attempting a PCA, lets check to see if there are any NA values so that the PCA will run.
+
+```{r}
+
+#Can use the summary function to get a text output that will list all variables and NAs associated with them
+
+summary(veggies_clean)
+
+#gg_miss_var() makes it a little easier to tell by creating a graphical output.
+gg_miss_var(veggies_clean)
+
+#No missing values, so we're good to go.
+
+```
+
+*******************
+
+
+
+```{r, }
+
+#Let's try to run a PCA now. Using the function, prcomp()
+
+veggies_pca<- prcomp(veggies_clean, scale. = TRUE)
+veggies_pca
+
+```
+
+```{r}
+veggies_biplot <- autoplot(veggies_pca,
+                      colour = NA,
+                      title = "Vegetable",
+                      loadings.label = TRUE,
+                      loadings.label.size = 3,
+                      loadings.label.colour = "black",
+                      loadings.label.repel = TRUE) +
+  theme_minimal()
+
+veggies_biplot
+
+```
+
+
+**Figure 1.** **Principal Components Analysis Biplot.** Biplot visualizing the amount of variance described by 10 nutritional variables related to vegetables.
+
+*******************
+
+
+####According to the bi-plot, for certain nutrients in vegetable or vegetable products, the following can be concluded:
+
+
+-The amount of protein and carbohydrates is highly positively correlated.
+
+-The amount of carbs and energy provided from veggies is positively correlated.
+
+-Vitamin B12 describes the least amount of variance in the PC1 direction.
+
+-Most of the variance is described in PC1.
+
+-The amount of vitamin A in a veggie product is negatively correlated with the energy recieved from a vegetable product.
+
+-However, vitamin c is very positively correlated with vitamin a.

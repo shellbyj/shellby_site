@@ -22,5 +22,24 @@ You can embed an R code chunk like this:
 summary(cars)## speed dist ## Min. : 4.0 Min. : 2.00 ## 1st Qu.:12.0 1st Qu.: 26.00 ## Median :15.0 Median : 36.00 ## Mean :15.4 Mean : 42.98 ## 3rd Qu.</description>
     </item>
     
+    <item>
+      <title>Population Growth Rates</title>
+      <link>/blog/1/01/01/per-capita-growth-rate/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/blog/1/01/01/per-capita-growth-rate/</guid>
+      <description>1. Calculate dN/NdtAnnual population data provides some initial population size at some year (t) and subsequent population sizes for each year afterwards. With these quantities, you can calculate the logistic per capita growth rate of a population when you take the natural log of the population size (at one year in the future) divided by the initial population size.
+Manual Calculation of dN/Ndt from 1963-1964 for each of the 5 countries.</description>
+    </item>
+    
+    <item>
+      <title>Snowshoe Hare Physical Data</title>
+      <link>/blog/1/01/01/snowshoe-hare-age/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/blog/1/01/01/snowshoe-hare-age/</guid>
+      <description>library(tidyverse)library(janitor)library(kableExtra)library(here)library(dplyr)library(stargazer)###Read in Datasnowshoe &amp;lt;- read.csv(&amp;quot;showshoe_lter.csv&amp;quot;)This markdown document contains code that explores Snowshoe hare (Lepus americanus) data collected in Bonanza Creek Experimental Forest. Data was collected from 1999-2012 and obtained from the Long Term Ecological Research portal.I’m interested in seeing if there is a relationship between age and snowshoe hare weight (g) and hindfoot value (metadata indicated that this variable was a dimensionless real number).</description>
+    </item>
+    
   </channel>
 </rss>

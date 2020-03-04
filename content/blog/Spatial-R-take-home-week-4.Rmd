@@ -1,0 +1,162 @@
+---
+title: "Spatial R"
+author: "Shellby Johnson"
+date: "February 3, 2020"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+
+library(tidyverse)
+library(sf)
+library(tmap)
+library(mapview)
+library(raster)
+
+```
+
+```{r}
+#read in data
+#dsn tells r which working directory to find the file in, but we use a "." which says we're already here
+# "layer =" is everything that starts with ca_eco so it reads all the spatial data files that start with that at one time
+
+ca_eco <- read_sf(dsn = ".", layer = "ca_eco") %>% 
+  dplyr::select(US_L3NAME) %>% 
+  rename(region = US_L3NAME) %>% 
+  st_simplify(dTolerance = 100)%>%  #reduces the number of points that make up the polygon 
+st_transform(crs = 4326)
+
+#crs = coordinate reference system
+
+#rmapshaper:: ms_simplify()
+
+plot(ca_eco)
+
+```
+
+###3. Read in the CA counties polygons
+
+```{r}
+
+ca_counties <- read_sf(dsn = ".", layer = "california_county_shape_file")
+
+st_crs(ca_counties) =4326
+
+```
+
+
+## 4. Read in CA dams locations and data
+
+```{r}
+ca_dams <- read_sf(dsn = ".", layer = "California_Jurisdictional_Dams")
+
+```
+
+
+##5.  Create a map of dams in CA, overlayed on eco-regions, with outlines of CA counties.
+
+```{r}
+
+# don't need to give an x/y argument when mapping sptaial data b/c it already recognizes lat and long.
+
+ggplot(data = ca_counties) +
+  geom_sf(color = "black",
+          size = 0.1) +
+  geom_sf(data = ca_eco,
+          aes(fill = region),
+          alpha = 0.5,
+          color = "NA",
+          show.legend = FALSE)+
+  geom_sf(data = ca_dams,
+          size = 0.5,
+          alpha = 0.5)+
+  theme_minimal()
+
+#Now you can see the county layers below and the ecoregions are transparent; you can also just map the ecoregions first and overlay the counties on top
+
+#only seeing the ecoregions b/c this layer was placed on top of teh counties layer
+
+```
+
+###6. Just explore SB county eco-regions
+
+```{r}
+sb <- ca_counties %>% 
+  filter(NAME == "Santa Barbara")
+
+#clip the ecoregion data to only include information within SB county - use st_intersection()
+
+eco_clip <- st_intersection(ca_eco, sb)
+
+#Now lets plot it, using ggplot 2
+
+ggplot() +
+  geom_sf(data = ca_counties, fill = "gray90",
+          color = "gray80",
+          size = 0.2) +
+  geom_sf(data = eco_clip, 
+          aes(fill = region),
+          color = "white",
+          size = 0.4,
+          show.legend = FALSE) +
+  coord_sf(xlim = c(-121, -119), ylim = c(33.5, 35.5)) +
+  scale_fill_manual(values = c("magenta", "gold2", "blue"))
+
+
+## coord_sf function manually clipped to the central coast becasue we don't need to see all of CA if we're only interested in SB
+
+
+```
+
+###7. Create an interactive map with tmap
+
+```{r}
+
+sb_clip_tmap <- tm_basemap("Esri.WorldImagery") +
+  tm_shape(eco_clip) +
+  tm_fill("region", palette = c("orange","blue", "yellow"), alpha = 0.5)
+
+tmap_mode("view")
+sb_clip_tmap
+
+
+```
+
+###8. How to create an 'sf' object from lat/long recordings (e.g. in an excel file)
+
+Make a mock dataset using tribble():
+
+```{r}
+my_example <- tribble(
+  ~id, ~lon, ~lat,# column names 
+  "tiger", -119.4, 34.35, #creating the first row
+  "lion", -11.41, 34.39,
+  "bear", -119.43, 34.38
+)
+
+
+#just becasue you put lat/long into a new dataset does not mean that R automatically recognizes it as spatial data
+
+#Convert to a spatial 'sf' object:
+
+animals_sf <- st_as_sf(my_example, coords = c("lon", "lat"), crs = 4326)
+```
+
+
+Make a map using tmap:
+
+```{r}
+
+animal_map <- tm_basemap("Stamen.Watercolor") +
+  tm_shape(animals_sf) +
+  tm_dots(labels = "id", col = "purple",
+          size = 0.5)
+
+animal_map
+
+```
+

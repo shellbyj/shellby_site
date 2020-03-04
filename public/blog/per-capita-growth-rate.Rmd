@@ -1,0 +1,202 @@
+---
+title: "Population Growth Rates"
+author: "Shellby Johnson"
+date: "February 3, 2019"
+html_document: default
+pdf_document: default
+categories: ["R"]
+tags: ["R Markdown", "plot", "regression"]
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r, include=FALSE}
+
+library(tidyverse)
+library(kableExtra)
+library(stargazer)
+
+
+popdata <- read_csv("assig1_data.csv")
+extra2_data <- read_csv("HW1_2x.csv")
+
+```
+
+
+###**1. Calculate dN/Ndt**
+
+a. Annual population data provides some initial population size at some year (t) and subsequent population sizes for each year afterwards. With these quantities, you can calculate the logistic per capita growth rate of a population when you take the natural log of the population size (at one year in the future) divided by the initial population size.
+
+b. Manual Calculation of dN/Ndt from 1963-1964 for each of the 5 countries.
+
+dN/Ndt = ln(Nt+1/Nt)
+
+-Brazil: ln(81,972,001/79,602,001) 
+-India:ln(486,639,001/476,632,001)  
+-Japan: ln(96,959,001/95,929,001) 
+-Mexico: ln(43,052,001/41,715,001)
+-South Korea: ln(27,767,001/27,138,001)
+
+```{r, include=FALSE}
+#manual calculations for all 5 dnndt values
+
+Brazil <- log(81972001/79602001)
+India <- log(486639001/476632001)
+Japan <- log(96959001/95929001)
+Mexico <- log(43052001/41715001)
+SouthKorea <- log(27767001/27138001)
+```
+
+```{r, include=FALSE}
+
+#creating data frame of calculated values
+
+Countries <- c('Brazil', 'India', 'Japan', 'Mexico', 'South Korea')
+Calculation <- c(log(81972001/79602001),log(486639001/476632001),
+                 log(96959001/95929001),log(43052001/41715001),log(27767001/27138001))
+Provided_Value <- c(0.029338507, 0.020777870, 0.010679874, 0.031547910, 0.022913305)
+
+dNNdt_calc <- data.frame(Countries, Calculation, Provided_Value, stringsAsFactors = FALSE)
+
+```
+
+```{r, echo=FALSE}
+#making table of new data frame with calculated dNNdt values
+
+kable(dNNdt_calc) %>% 
+  kable_styling(bootstrap_options = c("striped", "hover"), full_width = FALSE)
+```
+
+###**1c.Extra Points: Create a 1:1 plot of given dNNdt data against calculated values.**
+
+```{r, echo=FALSE}
+
+coef(lm(Given_dnndt ~ found_dnndt, data = extra2_data)) #finding the coefficients of the is linear model in order to tell the abline() funstion where to plot the line of best fit
+
+extraplot <- ggplot(extra2_data, aes( x= found_dnndt, y = Given_dnndt)) +
+  geom_point()
+extraplot + geom_abline(intercept = 1.388711e-10 , slope = 1.000000e+00)+
+  ggtitle("1:1 Plot of Per Capita Growth Rate Values")+
+  theme_classic()+
+  theme(plot.title = element_text(size=15, hjust = 0.5))+
+  labs( x = "Calulated dN/Ndt", y = "Given dN/Ndt")
+  
+
+```
+
+
+###**2a. Plots of logistic per capita growth rate vs population density (for each country)**
+
+
+
+```{r, echo=FALSE}
+#creating line plots for all 5 countries
+
+line_plots <- ggplot(popdata, aes(x = population/1000000, y = dNNdt))+
+  geom_point()+
+  facet_wrap(~country, scales = "free")+
+  theme_bw()+
+  labs(x = "population (millions)", y = "dN/Ndt")
+
+line_plots
+```
+
+
+### **2b. Finding the carrying capacity for South Korea and Brazil.** 
+
+The carrying capacity for each country was found using a linear equation. The lm() function provided an intercept and a coefficient. That equation was used to find the population size at K when dN/Ndt = 0. 
+
+- Brazil: K = 2.66 x 10^8 people (dN/Ndt = -1.501 x - 10^-10x + 3.996 x 10^-2)
+- South Korea = 5.36 x 10^7 people (dN/Ndt = -8.979 x 10^-10x + 4.815 x 10^-2)
+
+```{r, include=FALSE}
+# fit a linear regression to the graphs for South Korea and Brazil, to find out what the carrying capacity is when y (dNNdt) = 0.
+
+Brazil_data <- popdata %>% 
+  filter(country == "Brazil")
+
+lm(dNNdt ~ population, data = Brazil_data)
+
+SouthKorea_data <- popdata %>% 
+  filter(country == "South Korea")
+
+lm(dNNdt ~ population, data = SouthKorea_data)
+
+```
+
+
+### **3. Multivariate linear regression of food and education on population growth.**
+
+a. MLR for all 5 countries combined.
+
+```{r, echo=FALSE, results='hide'}
+
+population_lm <- lm(dNNdt ~ years_ed + calories_pd, data = popdata)
+
+summary(population_lm)
+```
+
+```{r, echo=FALSE, results='asis'}
+
+#creating stargazer table for combined regression model
+
+stargazer(population_lm, type = "html", align=TRUE, title = "Regression Results for all 5 countries combined")
+
+```
+
+b. MLR for each country.
+
+```{r, include=FALSE}
+
+# first, finish creating separate data frames for each country
+# we already have Brazil and South Korea, so do the other 3.
+
+Mexico_data <- popdata %>% 
+  filter(country == "Mexico")
+
+Japan_data <- popdata %>% 
+  filter(country == "Japan")
+
+India_data <- popdata %>% 
+  filter(country == "India")
+
+
+# Now we have data sets for all 5 countries separate; run lm for all
+
+Brazilpop_lm <- lm(dNNdt ~ years_ed + calories_pd, data = Brazil_data)
+
+summary(Brazilpop_lm)
+#####################################################################################
+Mexicopop_lm <- lm(dNNdt ~ years_ed + calories_pd, data = Mexico_data)
+
+summary(Mexicopop_lm)
+#####################################################################################
+
+SouthKpop_lm <- lm(dNNdt ~ years_ed + calories_pd, data = SouthKorea_data)
+
+summary(SouthKpop_lm)
+#####################################################################################
+
+Japanpop_lm <- lm(dNNdt ~ years_ed + calories_pd, data = Japan_data)
+
+summary(Japanpop_lm)
+#####################################################################################
+
+Indiapop_lm <- lm(dNNdt ~ years_ed + calories_pd, data = India_data)
+
+summary(Indiapop_lm)
+
+```
+
+```{r, echo = FALSE, results='asis'}
+
+#Finalized stargazer tables for the regression models
+
+
+stargazer(Brazilpop_lm, Indiapop_lm, Japanpop_lm, Mexicopop_lm, SouthKpop_lm, type = "html", align=TRUE, title = "Regression Results for all 5 countries")
+
+          
+```
+
