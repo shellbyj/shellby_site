@@ -6,30 +6,17 @@
     <description>Recent content in Blogs on Shellby Johnson: R Projects</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 02 Oct 2015 21:49:20 +0200</lastBuildDate>
     
 	<atom:link href="/blog/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
-      <title>Linked post</title>
-      <link>/blog/2015/10/02/linked-post/</link>
-      <pubDate>Fri, 02 Oct 2015 21:49:20 +0200</pubDate>
+      <title>California Spatial Analysis</title>
+      <link>/blog/1/01/01/spatial-r-take-home-week-4/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>/blog/2015/10/02/linked-post/</guid>
-      <description>I&#39;m a linked post in the menu. You can add other posts by adding the following line to the frontmatter:
-menu = &amp;quot;main&amp;quot;  Lorem ipsum dolor sit amet, consectetur adipiscing elit. In mauris nulla, vestibulum vel auctor sed, posuere eu lorem. Aliquam consequat augue ut accumsan mollis. Suspendisse malesuada sodales tincidunt. Vivamus sed erat ac augue bibendum porta sed id ipsum. Ut mollis mauris eget ligula sagittis cursus. Aliquam id pharetra tellus.</description>
-    </item>
-    
-    <item>
-      <title>Hello R Markdown</title>
-      <link>/blog/2015/07/23/2015-07-23-r-rmarkdown/</link>
-      <pubDate>Thu, 23 Jul 2015 21:13:14 -0500</pubDate>
-      
-      <guid>/blog/2015/07/23/2015-07-23-r-rmarkdown/</guid>
-      <description>R MarkdownThis is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see http://rmarkdown.rstudio.com.
-You can embed an R code chunk like this:
-summary(cars)## speed dist ## Min. : 4.0 Min. : 2.00 ## 1st Qu.:12.0 1st Qu.: 26.00 ## Median :15.0 Median : 36.00 ## Mean :15.4 Mean : 42.98 ## 3rd Qu.</description>
+      <guid>/blog/1/01/01/spatial-r-take-home-week-4/</guid>
+      <description>library(tidyverse)library(sf)library(tmap)library(mapview)library(raster)#read in data#dsn tells r which working directory to find the file in, but we use a &amp;quot;.&amp;quot; which says we&amp;#39;re already here# &amp;quot;layer =&amp;quot; is everything that starts with ca_eco so it reads all the spatial data files that start with that at one timeca_eco &amp;lt;- read_sf(dsn = &amp;quot;.&amp;quot;, layer = &amp;quot;ca_eco&amp;quot;) %&amp;gt;% dplyr::select(US_L3NAME) %&amp;gt;% rename(region = US_L3NAME) %&amp;gt;% st_simplify(dTolerance = 100)%&amp;gt;% #reduces the number of points that make up the polygon st_transform(crs = 4326)#crs = coordinate reference system#rmapshaper:: ms_simplify()plot(ca_eco)3.</description>
     </item>
     
     <item>
@@ -52,16 +39,7 @@ summary(cars)## speed dist ## Min. : 4.0 Min. : 2.00 ## 1st Qu.:12.0 1st Qu.: 2
     </item>
     
     <item>
-      <title>Spatial R</title>
-      <link>/blog/1/01/01/spatial-r-take-home-week-4/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>/blog/1/01/01/spatial-r-take-home-week-4/</guid>
-      <description>library(tidyverse)## Warning: package &amp;#39;tidyverse&amp;#39; was built under R version 3.5.3## -- Attaching packages ---------------------------------------------------------- tidyverse 1.3.0 --## &amp;lt;U+2713&amp;gt; ggplot2 3.2.1 &amp;lt;U+2713&amp;gt; purrr 0.3.3## &amp;lt;U+2713&amp;gt; tibble 2.1.3 &amp;lt;U+2713&amp;gt; dplyr 0.8.3## &amp;lt;U+2713&amp;gt; tidyr 1.0.0 &amp;lt;U+2713&amp;gt; stringr 1.4.0## &amp;lt;U+2713&amp;gt; readr 1.3.1 &amp;lt;U+2713&amp;gt; forcats 0.4.0## Warning: package &amp;#39;ggplot2&amp;#39; was built under R version 3.5.3## Warning: package &amp;#39;tibble&amp;#39; was built under R version 3.</description>
-    </item>
-    
-    <item>
-      <title>Vegetable Nutrients PCA</title>
+      <title>Vegetable Nutrients: PCA</title>
       <link>/blog/1/01/01/vegetable-nutrients-pca/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       

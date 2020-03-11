@@ -32,7 +32,7 @@
 
   
   
-    <link href="/css/style.pink.css" rel="stylesheet" id="theme-stylesheet">
+    <link href="/css/style.blue.css" rel="stylesheet" id="theme-stylesheet">
   
 
   
@@ -79,7 +79,7 @@
     <meta property="og:image:height" content="420">
   
   
-  <meta property="og:updated_time" content="2015-10-02T21:49:20&#43;0200">
+  
   
 
   
@@ -137,7 +137,7 @@
             <div class="navbar-header">
                 <a class="navbar-brand home" href="/">
                     <img src="/" alt="Shellby Johnson: R Projects logo" class="hidden-xs hidden-sm">
-                    <img src="/" alt="Shellby Johnson: R Projects logo" class="visible-xs visible-sm">
+                    <img src="/img/sj_initials.jpg" alt="Shellby Johnson: R Projects logo" class="visible-xs visible-sm">
                     <span class="sr-only">Shellby Johnson: R Projects - go to homepage</span>
                 </a>
                 <div class="navbar-buttons">
@@ -228,7 +228,7 @@
                             
                         </div>
                         <div class="col-sm-7">
-                            <img class="img-responsive" src="" alt="">
+                            <img class="img-responsive" src="img/carousel/headshot.png" alt="">
                         </div>
                     </div>
                 </div>
@@ -236,14 +236,8 @@
                 <div class="item">
                     <div class="row">
                         <div class="col-sm-5 right">
-                            <h1>46 HTML pages full of features</h1>
-                            <ul class="list-style-none">
-   <li>Sliders and carousels</li>
-   <li>4 Header variations</li>
-   <li>Google maps, Forms, Megamenu, CSS3 Animations and much more</li>
-   <li>+ 11 extra pages showing template features</li>
- </ul>
-
+                            <h1>Click on the R Projects Tab to Check out some cool data science!</h1>
+                            
                         </div>
                         <div class="col-sm-7">
                             <img class="img-responsive" src="img/carousel/template-mac.png" alt="">
@@ -254,14 +248,8 @@
                 <div class="item">
                     <div class="row">
                         <div class="col-sm-5 right">
-                            <h1>Design</h1>
-                            <ul class="list-style-none">
-  <li>Clean and elegant design</li>
-  <li>Full width and boxed mode</li>
-  <li>Easily readable Roboto font and awesome icons</li>
-  <li>7 preprepared colour variations</li>
-</ul>
-
+                            <h1>Click on the FAQ tab to get to Know Me!</h1>
+                            
                         </div>
                         <div class="col-sm-7">
                             <img class="img-responsive" src="img/carousel/template-easy-customize.png" alt="">
@@ -272,15 +260,11 @@
                 <div class="item">
                     <div class="row">
                         <div class="col-sm-5 right">
-                            <h1>Easy to customize</h1>
-                            <ul class="list-style-none">
-  <li>7 preprepared colour variations.</li>
-  <li>Easily to change fonts</li>
-</ul>
-
+                            <h1>Take a look at my resume!</h1>
+                            
                         </div>
                         <div class="col-sm-7">
-                            <img class="img-responsive" src="img/carousel/template-easy-code.png" alt="">
+                            <img class="img-responsive" src="" alt="">
                         </div>
                     </div>
                 </div>
@@ -560,29 +544,28 @@
                         <div class="top">
                             <div class="image" style="overflow:hidden">
                                 
-                                <img src="/img/banners/banner-4.jpg" class="img-responsive" alt="" >
+                                <img src="/img/banners/california.jpg" class="img-responsive" alt="" >
                                 
                             </div>
                             <div class="bg"></div>
                             <div class="text">
                                 <p class="buttons">
-                                    <a href="/blog/2015/10/02/linked-post/" class="btn btn-template-transparent-primary"><i class="fas fa-link"></i> Read more</a>
+                                    <a href="/blog/1/01/01/spatial-r-take-home-week-4/" class="btn btn-template-transparent-primary"><i class="fas fa-link"></i> Read more</a>
                                 </p>
                             </div>
                         </div>
 
                         <div class="content">
-                            <h4><a href="/blog/2015/10/02/linked-post/">Linked post</a></h4>
+                            <h4><a href="/blog/1/01/01/spatial-r-take-home-week-4/">California Spatial Analysis</a></h4>
                             <p class="author-category">
                             
-                            By <a href="#">John Doe</a>
+                            By <a href="#">Shellby Johnson</a>
                             
-                            on October 2, 2015
+                            on January 1, 0001
                             </p>
-                            <p class="intro">I'm a linked post in the menu. You can add other posts by adding the following line to the frontmatter:
-menu = &quot;main&quot;  Lorem ipsum dolor sit amet, consectetur adipiscing elit. In mauris nulla, vestibulum vel auctor sed, posuere eu lorem. Aliquam consequat augue ut accumsan mollis. Suspendisse malesuada sodales tincidunt. Vivamus sed erat ac augue bibendum porta sed id ipsum. Ut mollis mauris eget ligula sagittis cursus. Aliquam id pharetra tellus.</p>
+                            <p class="intro">library(tidyverse)library(sf)library(tmap)library(mapview)library(raster)#read in data#dsn tells r which working directory to find the file in, but we use a &quot;.&quot; which says we&#39;re already here# &quot;layer =&quot; is everything that starts with ca_eco so it reads all the spatial data files that start with that at one timeca_eco &lt;- read_sf(dsn = &quot;.&quot;, layer = &quot;ca_eco&quot;) %&gt;% dplyr::select(US_L3NAME) %&gt;% rename(region = US_L3NAME) %&gt;% st_simplify(dTolerance = 100)%&gt;% #reduces the number of points that make up the polygon st_transform(crs = 4326)#crs = coordinate reference system#rmapshaper:: ms_simplify()plot(ca_eco)3.</p>
                             <p class="read-more">
-                              <a href="/blog/2015/10/02/linked-post/" class="btn btn-template-main">Continue reading</a>
+                              <a href="/blog/1/01/01/spatial-r-take-home-week-4/" class="btn btn-template-main">Continue reading</a>
                             </p>
                         </div>
                     </div>
@@ -595,43 +578,7 @@ menu = &quot;main&quot;  Lorem ipsum dolor sit amet, consectetur adipiscing elit
                         <div class="top">
                             <div class="image" style="overflow:hidden">
                                 
-                                <img src="/img/placeholder.png" class="img-responsive" alt="">
-                                
-                            </div>
-                            <div class="bg"></div>
-                            <div class="text">
-                                <p class="buttons">
-                                    <a href="/blog/2015/07/23/2015-07-23-r-rmarkdown/" class="btn btn-template-transparent-primary"><i class="fas fa-link"></i> Read more</a>
-                                </p>
-                            </div>
-                        </div>
-
-                        <div class="content">
-                            <h4><a href="/blog/2015/07/23/2015-07-23-r-rmarkdown/">Hello R Markdown</a></h4>
-                            <p class="author-category">
-                            
-                            By <a href="#">Frida Gomam</a>
-                            
-                            on July 23, 2015
-                            </p>
-                            <p class="intro">R MarkdownThis is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see http://rmarkdown.rstudio.com.
-You can embed an R code chunk like this:
-summary(cars)## speed dist ## Min. : 4.0 Min. : 2.00 ## 1st Qu.:12.0 1st Qu.: 26.00 ## Median :15.0 Median : 36.00 ## Mean :15.4 Mean : 42.98 ## 3rd Qu.</p>
-                            <p class="read-more">
-                              <a href="/blog/2015/07/23/2015-07-23-r-rmarkdown/" class="btn btn-template-main">Continue reading</a>
-                            </p>
-                        </div>
-                    </div>
-                    
-
-                </div>
-                
-                <div class="col-md-3 col-sm-6">
-                    <div class="box-image-text blog">
-                        <div class="top">
-                            <div class="image" style="overflow:hidden">
-                                
-                                <img src="/img/placeholder.png" class="img-responsive" alt="">
+                                <img src="/img/banners/population.jpg" class="img-responsive" alt="" >
                                 
                             </div>
                             <div class="bg"></div>
@@ -666,7 +613,7 @@ summary(cars)## speed dist ## Min. : 4.0 Min. : 2.00 ## 1st Qu.:12.0 1st Qu.: 2
                         <div class="top">
                             <div class="image" style="overflow:hidden">
                                 
-                                <img src="/img/placeholder.png" class="img-responsive" alt="">
+                                <img src="/img/banners/snowshoe_hare.jpg" class="img-responsive" alt="" >
                                 
                             </div>
                             <div class="bg"></div>
@@ -688,6 +635,41 @@ summary(cars)## speed dist ## Min. : 4.0 Min. : 2.00 ## 1st Qu.:12.0 1st Qu.: 2
                             <p class="intro">library(tidyverse)library(janitor)library(kableExtra)library(here)library(dplyr)library(stargazer)###Read in Datasnowshoe &lt;- read.csv(&quot;showshoe_lter.csv&quot;)This markdown document contains code that explores Snowshoe hare (Lepus americanus) data collected in Bonanza Creek Experimental Forest. Data was collected from 1999-2012 and obtained from the Long Term Ecological Research portal.I’m interested in seeing if there is a relationship between age and snowshoe hare weight (g) and hindfoot value (metadata indicated that this variable was a dimensionless real number).</p>
                             <p class="read-more">
                               <a href="/blog/1/01/01/snowshoe-hare-age/" class="btn btn-template-main">Continue reading</a>
+                            </p>
+                        </div>
+                    </div>
+                    
+
+                </div>
+                
+                <div class="col-md-3 col-sm-6">
+                    <div class="box-image-text blog">
+                        <div class="top">
+                            <div class="image" style="overflow:hidden">
+                                
+                                <img src="/img/banners/veggies.jpg" class="img-responsive" alt="" >
+                                
+                            </div>
+                            <div class="bg"></div>
+                            <div class="text">
+                                <p class="buttons">
+                                    <a href="/blog/1/01/01/vegetable-nutrients-pca/" class="btn btn-template-transparent-primary"><i class="fas fa-link"></i> Read more</a>
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="content">
+                            <h4><a href="/blog/1/01/01/vegetable-nutrients-pca/">Vegetable Nutrients: PCA</a></h4>
+                            <p class="author-category">
+                            
+                            By <a href="#">Shellby Johnson</a>
+                            
+                            on January 1, 0001
+                            </p>
+                            <p class="intro">library(tidyverse)library(here)library(janitor)library(naniar)library(VIM)library(skimr)library(ggfortify)credit: yahoo!Finance
+This markdown document contains code that explores nutritional variables related to vegetables and vegetable products. Data was sourced from the USDA National Nutrient Database (also known as Food Data Central). I will be exploring the correlation between several nutrients within this particular food group (i.e. energy, vitamin A, carbohydrates, etc). To explore this, a principal components Analysis (PCA) was completed.</p>
+                            <p class="read-more">
+                              <a href="/blog/1/01/01/vegetable-nutrients-pca/" class="btn btn-template-main">Continue reading</a>
                             </p>
                         </div>
                     </div>
@@ -810,27 +792,14 @@ summary(cars)## speed dist ## Min. : 4.0 Min. : 2.00 ## 1st Qu.:12.0 1st Qu.: 2
                 
                 <div class="item same-height-row clearfix">
                     <div class="image same-height-always">
-                        <a href="/blog/2015/10/02/linked-post/">
+                        <a href="/blog/1/01/01/spatial-r-take-home-week-4/">
                           
-                            <img src="/img/banners/banner-4.jpg" class="img-responsive" alt="Linked post">
-                          
-                        </a>
-                    </div>
-                    <div class="name same-height-always">
-                        <h5><a href="/blog/2015/10/02/linked-post/">Linked post</a></h5>
-                    </div>
-                </div>
-                
-                <div class="item same-height-row clearfix">
-                    <div class="image same-height-always">
-                        <a href="/blog/2015/07/23/2015-07-23-r-rmarkdown/">
-                          
-                            <img src="/img/placeholder.png" class="img-responsive" alt="Hello R Markdown">
+                            <img src="/img/banners/california.jpg" class="img-responsive" alt="California Spatial Analysis">
                           
                         </a>
                     </div>
                     <div class="name same-height-always">
-                        <h5><a href="/blog/2015/07/23/2015-07-23-r-rmarkdown/">Hello R Markdown</a></h5>
+                        <h5><a href="/blog/1/01/01/spatial-r-take-home-week-4/">California Spatial Analysis</a></h5>
                     </div>
                 </div>
                 
@@ -838,12 +807,25 @@ summary(cars)## speed dist ## Min. : 4.0 Min. : 2.00 ## 1st Qu.:12.0 1st Qu.: 2
                     <div class="image same-height-always">
                         <a href="/blog/1/01/01/per-capita-growth-rate/">
                           
-                            <img src="/img/placeholder.png" class="img-responsive" alt="Population Growth Rates">
+                            <img src="/img/banners/population.jpg" class="img-responsive" alt="Population Growth Rates">
                           
                         </a>
                     </div>
                     <div class="name same-height-always">
                         <h5><a href="/blog/1/01/01/per-capita-growth-rate/">Population Growth Rates</a></h5>
+                    </div>
+                </div>
+                
+                <div class="item same-height-row clearfix">
+                    <div class="image same-height-always">
+                        <a href="/blog/1/01/01/snowshoe-hare-age/">
+                          
+                            <img src="/img/banners/snowshoe_hare.jpg" class="img-responsive" alt="Snowshoe Hare Physical Data">
+                          
+                        </a>
+                    </div>
+                    <div class="name same-height-always">
+                        <h5><a href="/blog/1/01/01/snowshoe-hare-age/">Snowshoe Hare Physical Data</a></h5>
                     </div>
                 </div>
                 

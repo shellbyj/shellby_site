@@ -1,15 +1,16 @@
 ---
-title: "Spatial R"
+title: "California Spatial Analysis"
 author: "Shellby Johnson"
 date: "February 3, 2020"
 output: html_document
+banner: img/banners/california.jpg
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_chunk$set(echo = TRUE, warning = 'hide', message = 'hide')
 ```
 
-```{r}
+```{r, warning=FALSE, message=FALSE}
 
 library(tidyverse)
 library(sf)

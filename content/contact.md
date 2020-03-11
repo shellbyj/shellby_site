@@ -3,8 +3,8 @@ id: contact
 title: Contact
 ---
 
-# We are here to help you
+# Thank you for visiting my site
 
-Are you curious about something? Do you have some kind of problem with our products? As am hastily invited settled at limited civilly fortune me. Really spring in extent an by. Judge but built gay party world. Of so am he remember although required. Bachelor unpacked be advanced at. Confined in declared marianne is vicinity.
+Please feel free to reach out to me! I am open to connecting about collaborative data science projects and am happy to discuss any of the R projects listed on my site. 
 
-Please feel free to contact us, our customer service center is working for you 24/7.
+You can reach me at shellby@bren.ucsb.edu or you may complete the form below.

@@ -1,8 +1,9 @@
 ---
-title: "Vegetable Nutrients PCA"
+title: "Vegetable Nutrients: PCA"
 author: "Shellby Johnson"
 date: "February 4, 2020"
 output: html_document
+banner: img/banners/veggies.jpg
 ---
 
 ```{r setup, include=FALSE}

@@ -4,6 +4,7 @@ author: "Shellby Johnson"
 date: "February 3, 2019"
 html_document: default
 pdf_document: default
+banner: img/banners/population.jpg
 categories: ["R"]
 tags: ["R Markdown", "plot", "regression"]
 ---
@@ -12,7 +13,7 @@ tags: ["R Markdown", "plot", "regression"]
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-```{r, include=FALSE}
+```{r, echo=TRUE, include=FALSE}
 
 library(tidyverse)
 library(kableExtra)
@@ -39,7 +40,7 @@ dN/Ndt = ln(Nt+1/Nt)
 -Mexico: ln(43,052,001/41,715,001)
 -South Korea: ln(27,767,001/27,138,001)
 
-```{r, include=FALSE}
+```{r, include=TRUE}
 #manual calculations for all 5 dnndt values
 
 Brazil <- log(81972001/79602001)
@@ -49,7 +50,7 @@ Mexico <- log(43052001/41715001)
 SouthKorea <- log(27767001/27138001)
 ```
 
-```{r, include=FALSE}
+```{r, include=TRUE}
 
 #creating data frame of calculated values
 
@@ -62,7 +63,7 @@ dNNdt_calc <- data.frame(Countries, Calculation, Provided_Value, stringsAsFactor
 
 ```
 
-```{r, echo=FALSE}
+```{r, echo=TRUE}
 #making table of new data frame with calculated dNNdt values
 
 kable(dNNdt_calc) %>% 
@@ -71,7 +72,7 @@ kable(dNNdt_calc) %>%
 
 ###**1c.Extra Points: Create a 1:1 plot of given dNNdt data against calculated values.**
 
-```{r, echo=FALSE}
+```{r, echo=TRUE}
 
 coef(lm(Given_dnndt ~ found_dnndt, data = extra2_data)) #finding the coefficients of the is linear model in order to tell the abline() funstion where to plot the line of best fit
 
@@ -91,7 +92,7 @@ extraplot + geom_abline(intercept = 1.388711e-10 , slope = 1.000000e+00)+
 
 
 
-```{r, echo=FALSE}
+```{r, echo=TRUE}
 #creating line plots for all 5 countries
 
 line_plots <- ggplot(popdata, aes(x = population/1000000, y = dNNdt))+
@@ -111,7 +112,7 @@ The carrying capacity for each country was found using a linear equation. The lm
 - Brazil: K = 2.66 x 10^8 people (dN/Ndt = -1.501 x - 10^-10x + 3.996 x 10^-2)
 - South Korea = 5.36 x 10^7 people (dN/Ndt = -8.979 x 10^-10x + 4.815 x 10^-2)
 
-```{r, include=FALSE}
+```{r, echo=TRUE, include=FALSE}
 # fit a linear regression to the graphs for South Korea and Brazil, to find out what the carrying capacity is when y (dNNdt) = 0.
 
 Brazil_data <- popdata %>% 
@@ -131,14 +132,14 @@ lm(dNNdt ~ population, data = SouthKorea_data)
 
 a. MLR for all 5 countries combined.
 
-```{r, echo=FALSE, results='hide'}
+```{r, echo=TRUE, results='hide'}
 
 population_lm <- lm(dNNdt ~ years_ed + calories_pd, data = popdata)
 
 summary(population_lm)
 ```
 
-```{r, echo=FALSE, results='asis'}
+```{r, echo=TRUE, results='asis'}
 
 #creating stargazer table for combined regression model
 
@@ -148,7 +149,7 @@ stargazer(population_lm, type = "html", align=TRUE, title = "Regression Results 
 
 b. MLR for each country.
 
-```{r, include=FALSE}
+```{r, echo=TRUE, include=FALSE}
 
 # first, finish creating separate data frames for each country
 # we already have Brazil and South Korea, so do the other 3.
@@ -190,7 +191,7 @@ summary(Indiapop_lm)
 
 ```
 
-```{r, echo = FALSE, results='asis'}
+```{r, echo = TRUE, results='asis'}
 
 #Finalized stargazer tables for the regression models
 

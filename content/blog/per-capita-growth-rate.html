@@ -4,6 +4,7 @@ author: "Shellby Johnson"
 date: "February 3, 2019"
 html_document: default
 pdf_document: default
+banner: img/banners/population.jpg
 categories: ["R"]
 tags: ["R Markdown", "plot", "regression"]
 ---
@@ -20,6 +21,25 @@ tags: ["R Markdown", "plot", "regression"]
 <p>dN/Ndt = ln(Nt+1/Nt)</p>
 <p>-Brazil: ln(81,972,001/79,602,001) -India:ln(486,639,001/476,632,001)<br />
 -Japan: ln(96,959,001/95,929,001) -Mexico: ln(43,052,001/41,715,001) -South Korea: ln(27,767,001/27,138,001)</p>
+<pre class="r"><code>#manual calculations for all 5 dnndt values
+
+Brazil &lt;- log(81972001/79602001)
+India &lt;- log(486639001/476632001)
+Japan &lt;- log(96959001/95929001)
+Mexico &lt;- log(43052001/41715001)
+SouthKorea &lt;- log(27767001/27138001)</code></pre>
+<pre class="r"><code>#creating data frame of calculated values
+
+Countries &lt;- c(&#39;Brazil&#39;, &#39;India&#39;, &#39;Japan&#39;, &#39;Mexico&#39;, &#39;South Korea&#39;)
+Calculation &lt;- c(log(81972001/79602001),log(486639001/476632001),
+                 log(96959001/95929001),log(43052001/41715001),log(27767001/27138001))
+Provided_Value &lt;- c(0.029338507, 0.020777870, 0.010679874, 0.031547910, 0.022913305)
+
+dNNdt_calc &lt;- data.frame(Countries, Calculation, Provided_Value, stringsAsFactors = FALSE)</code></pre>
+<pre class="r"><code>#making table of new data frame with calculated dNNdt values
+
+kable(dNNdt_calc) %&gt;% 
+  kable_styling(bootstrap_options = c(&quot;striped&quot;, &quot;hover&quot;), full_width = FALSE)</code></pre>
 <table class="table table-striped table-hover" style="width: auto !important; margin-left: auto; margin-right: auto;">
 <thead>
 <tr>
@@ -95,12 +115,29 @@ South Korea
 </div>
 <div id="c.extra-points-create-a-11-plot-of-given-dnndt-data-against-calculated-values." class="section level3">
 <h3><strong>1c.Extra Points: Create a 1:1 plot of given dNNdt data against calculated values.</strong></h3>
+<pre class="r"><code>coef(lm(Given_dnndt ~ found_dnndt, data = extra2_data)) #finding the coefficients of the is linear model in order to tell the abline() funstion where to plot the line of best fit</code></pre>
 <pre><code>##  (Intercept)  found_dnndt 
 ## 1.388711e-10 1.000000e+00</code></pre>
+<pre class="r"><code>extraplot &lt;- ggplot(extra2_data, aes( x= found_dnndt, y = Given_dnndt)) +
+  geom_point()
+extraplot + geom_abline(intercept = 1.388711e-10 , slope = 1.000000e+00)+
+  ggtitle(&quot;1:1 Plot of Per Capita Growth Rate Values&quot;)+
+  theme_classic()+
+  theme(plot.title = element_text(size=15, hjust = 0.5))+
+  labs( x = &quot;Calulated dN/Ndt&quot;, y = &quot;Given dN/Ndt&quot;)</code></pre>
 <p><img src="/blog/per-capita-growth-rate_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
 </div>
 <div id="a.-plots-of-logistic-per-capita-growth-rate-vs-population-density-for-each-country" class="section level3">
 <h3><strong>2a. Plots of logistic per capita growth rate vs population density (for each country)</strong></h3>
+<pre class="r"><code>#creating line plots for all 5 countries
+
+line_plots &lt;- ggplot(popdata, aes(x = population/1000000, y = dNNdt))+
+  geom_point()+
+  facet_wrap(~country, scales = &quot;free&quot;)+
+  theme_bw()+
+  labs(x = &quot;population (millions)&quot;, y = &quot;dN/Ndt&quot;)
+
+line_plots</code></pre>
 <p><img src="/blog/per-capita-growth-rate_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
 </div>
 <div id="b.-finding-the-carrying-capacity-for-south-korea-and-brazil." class="section level3">
@@ -116,6 +153,12 @@ South Korea
 <ol style="list-style-type: lower-alpha">
 <li>MLR for all 5 countries combined.</li>
 </ol>
+<pre class="r"><code>population_lm &lt;- lm(dNNdt ~ years_ed + calories_pd, data = popdata)
+
+summary(population_lm)</code></pre>
+<pre class="r"><code>#creating stargazer table for combined regression model
+
+stargazer(population_lm, type = &quot;html&quot;, align=TRUE, title = &quot;Regression Results for all 5 countries combined&quot;)</code></pre>
 <table style="text-align:center">
 <caption>
 <strong>Regression Results for all 5 countries combined</strong>
@@ -271,6 +314,10 @@ F Statistic
 <ol start="2" style="list-style-type: lower-alpha">
 <li>MLR for each country.</li>
 </ol>
+<pre class="r"><code>#Finalized stargazer tables for the regression models
+
+
+stargazer(Brazilpop_lm, Indiapop_lm, Japanpop_lm, Mexicopop_lm, SouthKpop_lm, type = &quot;html&quot;, align=TRUE, title = &quot;Regression Results for all 5 countries&quot;)</code></pre>
 <table style="text-align:center">
 <caption>
 <strong>Regression Results for all 5 countries</strong>

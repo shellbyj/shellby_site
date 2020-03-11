@@ -7,7 +7,7 @@
   <meta name="googlebot" content="index,follow,snippet,archive">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   
-  <title>Spatial R</title>
+  <title>California Spatial Analysis</title>
   <meta name="author" content="Shellby Johnson" />
   
   
@@ -32,7 +32,7 @@
 
   
   
-    <link href="/css/style.pink.css" rel="stylesheet" id="theme-stylesheet">
+    <link href="/css/style.blue.css" rel="stylesheet" id="theme-stylesheet">
   
 
   
@@ -66,17 +66,17 @@
   
   <meta property="og:locale" content="en_us">
   <meta property="og:site_name" content="Shellby Johnson: R Projects">
-  <meta property="og:title" content="Spatial R">
+  <meta property="og:title" content="California Spatial Analysis">
   <meta property="og:type" content="article">
   <meta property="og:url" content="/blog/1/01/01/spatial-r-take-home-week-4/" />
   <meta property="og:description" content="Site template made by devcows using hugo">
-  <meta property="og:image" content="/img/sharing-default.png">
-  <meta property="og:image:type" content="image/png">
+  <meta property="og:image" content="/img/banners/california.jpg">
+  <meta property="og:image:type" content="image/jpg">
   
   
   
     <meta property="og:image:width" content="800">
-    <meta property="og:image:height" content="420">
+    <meta property="og:image:height" content="600">
   
   
   
@@ -91,11 +91,11 @@
   
 
   
-  <meta name="twitter:card" content="summary">
+  <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:site" content="@GoHugoIO">
-  <meta name="twitter:title" content="Spatial R">
+  <meta name="twitter:title" content="California Spatial Analysis">
   
-  <meta name="twitter:image" content="/img/sharing-default.png">
+  <meta name="twitter:image" content="/img/banners/california.jpg">
   
   <meta name="twitter:description" content="Site template made by devcows using hugo">
   
@@ -116,9 +116,9 @@
         <div class="container">
             <div class="navbar-header">
                 <a class="navbar-brand home" href="/">
-                    <img src="/" alt="Spatial R logo" class="hidden-xs hidden-sm">
-                    <img src="/" alt="Spatial R logo" class="visible-xs visible-sm">
-                    <span class="sr-only">Spatial R - go to homepage</span>
+                    <img src="/" alt="California Spatial Analysis logo" class="hidden-xs hidden-sm">
+                    <img src="/img/sj_initials.jpg" alt="California Spatial Analysis logo" class="visible-xs visible-sm">
+                    <span class="sr-only">California Spatial Analysis - go to homepage</span>
                 </a>
                 <div class="navbar-buttons">
                     <button type="button" class="navbar-toggle btn-template-main" data-toggle="collapse" data-target="#navigation">
@@ -196,7 +196,7 @@
     <div class="container">
         <div class="row">
             <div class="col-md-12">
-                <h1>Spatial R</h1>
+                <h1>California Spatial Analysis</h1>
             </div>
         </div>
     </div>
@@ -235,44 +235,11 @@
 <script src="/rmarkdown-libs/leaflet-providers-plugin/leaflet-providers-plugin.js"></script>
 
 
-<pre class="r"><code>library(tidyverse)</code></pre>
-<pre><code>## Warning: package &#39;tidyverse&#39; was built under R version 3.5.3</code></pre>
-<pre><code>## -- Attaching packages ---------------------------------------------------------- tidyverse 1.3.0 --</code></pre>
-<pre><code>## &lt;U+2713&gt; ggplot2 3.2.1     &lt;U+2713&gt; purrr   0.3.3
-## &lt;U+2713&gt; tibble  2.1.3     &lt;U+2713&gt; dplyr   0.8.3
-## &lt;U+2713&gt; tidyr   1.0.0     &lt;U+2713&gt; stringr 1.4.0
-## &lt;U+2713&gt; readr   1.3.1     &lt;U+2713&gt; forcats 0.4.0</code></pre>
-<pre><code>## Warning: package &#39;ggplot2&#39; was built under R version 3.5.3</code></pre>
-<pre><code>## Warning: package &#39;tibble&#39; was built under R version 3.5.3</code></pre>
-<pre><code>## Warning: package &#39;tidyr&#39; was built under R version 3.5.3</code></pre>
-<pre><code>## Warning: package &#39;readr&#39; was built under R version 3.5.3</code></pre>
-<pre><code>## Warning: package &#39;purrr&#39; was built under R version 3.5.3</code></pre>
-<pre><code>## Warning: package &#39;dplyr&#39; was built under R version 3.5.3</code></pre>
-<pre><code>## Warning: package &#39;stringr&#39; was built under R version 3.5.3</code></pre>
-<pre><code>## Warning: package &#39;forcats&#39; was built under R version 3.5.3</code></pre>
-<pre><code>## -- Conflicts ------------------------------------------------------------- tidyverse_conflicts() --
-## x dplyr::filter() masks stats::filter()
-## x dplyr::lag()    masks stats::lag()</code></pre>
-<pre class="r"><code>library(sf)</code></pre>
-<pre><code>## Warning: package &#39;sf&#39; was built under R version 3.5.3</code></pre>
-<pre><code>## Linking to GEOS 3.6.1, GDAL 2.2.3, PROJ 4.9.3</code></pre>
-<pre class="r"><code>library(tmap)</code></pre>
-<pre><code>## Warning: package &#39;tmap&#39; was built under R version 3.5.3</code></pre>
-<pre><code>## This version of Shiny is designed to work with &#39;htmlwidgets&#39; &gt;= 1.5.
-##     Please upgrade via install.packages(&#39;htmlwidgets&#39;).</code></pre>
-<pre class="r"><code>library(mapview)</code></pre>
-<pre><code>## Warning: package &#39;mapview&#39; was built under R version 3.5.3</code></pre>
-<pre class="r"><code>library(raster)</code></pre>
-<pre><code>## Warning: package &#39;raster&#39; was built under R version 3.5.3</code></pre>
-<pre><code>## Loading required package: sp</code></pre>
-<pre><code>## 
-## Attaching package: &#39;raster&#39;</code></pre>
-<pre><code>## The following object is masked from &#39;package:dplyr&#39;:
-## 
-##     select</code></pre>
-<pre><code>## The following object is masked from &#39;package:tidyr&#39;:
-## 
-##     extract</code></pre>
+<pre class="r"><code>library(tidyverse)
+library(sf)
+library(tmap)
+library(mapview)
+library(raster)</code></pre>
 <pre class="r"><code>#read in data
 #dsn tells r which working directory to find the file in, but we use a &quot;.&quot; which says we&#39;re already here
 # &quot;layer =&quot; is everything that starts with ca_eco so it reads all the spatial data files that start with that at one time
@@ -462,11 +429,7 @@ animal_map</code></pre>
             
             
             <li>
-                <a href="/categories/programming">programming (1)</a>
-            </li>
-            
-            <li>
-                <a href="/categories/r">r (3)</a>
+                <a href="/categories/r">r (2)</a>
             </li>
             
         </ul>
@@ -492,19 +455,7 @@ animal_map</code></pre>
             
             
             <li>
-                <a href="/tags/golang"><i class="fas fa-tags"></i> golang</a>
-            </li>
-            
-            <li>
-                <a href="/tags/hugo"><i class="fas fa-tags"></i> hugo</a>
-            </li>
-            
-            <li>
                 <a href="/tags/plot"><i class="fas fa-tags"></i> plot</a>
-            </li>
-            
-            <li>
-                <a href="/tags/programming"><i class="fas fa-tags"></i> programming</a>
             </li>
             
             <li>
@@ -513,10 +464,6 @@ animal_map</code></pre>
             
             <li>
                 <a href="/tags/regression"><i class="fas fa-tags"></i> regression</a>
-            </li>
-            
-            <li>
-                <a href="/tags/theme"><i class="fas fa-tags"></i> theme</a>
             </li>
             
         </ul>
@@ -568,27 +515,14 @@ animal_map</code></pre>
                 
                 <div class="item same-height-row clearfix">
                     <div class="image same-height-always">
-                        <a href="/blog/2015/10/02/linked-post/">
+                        <a href="/blog/1/01/01/spatial-r-take-home-week-4/">
                           
-                            <img src="/img/banners/banner-4.jpg" class="img-responsive" alt="Linked post">
-                          
-                        </a>
-                    </div>
-                    <div class="name same-height-always">
-                        <h5><a href="/blog/2015/10/02/linked-post/">Linked post</a></h5>
-                    </div>
-                </div>
-                
-                <div class="item same-height-row clearfix">
-                    <div class="image same-height-always">
-                        <a href="/blog/2015/07/23/2015-07-23-r-rmarkdown/">
-                          
-                            <img src="/img/placeholder.png" class="img-responsive" alt="Hello R Markdown">
+                            <img src="/img/banners/california.jpg" class="img-responsive" alt="California Spatial Analysis">
                           
                         </a>
                     </div>
                     <div class="name same-height-always">
-                        <h5><a href="/blog/2015/07/23/2015-07-23-r-rmarkdown/">Hello R Markdown</a></h5>
+                        <h5><a href="/blog/1/01/01/spatial-r-take-home-week-4/">California Spatial Analysis</a></h5>
                     </div>
                 </div>
                 
@@ -596,12 +530,25 @@ animal_map</code></pre>
                     <div class="image same-height-always">
                         <a href="/blog/1/01/01/per-capita-growth-rate/">
                           
-                            <img src="/img/placeholder.png" class="img-responsive" alt="Population Growth Rates">
+                            <img src="/img/banners/population.jpg" class="img-responsive" alt="Population Growth Rates">
                           
                         </a>
                     </div>
                     <div class="name same-height-always">
                         <h5><a href="/blog/1/01/01/per-capita-growth-rate/">Population Growth Rates</a></h5>
+                    </div>
+                </div>
+                
+                <div class="item same-height-row clearfix">
+                    <div class="image same-height-always">
+                        <a href="/blog/1/01/01/snowshoe-hare-age/">
+                          
+                            <img src="/img/banners/snowshoe_hare.jpg" class="img-responsive" alt="Snowshoe Hare Physical Data">
+                          
+                        </a>
+                    </div>
+                    <div class="name same-height-always">
+                        <h5><a href="/blog/1/01/01/snowshoe-hare-age/">Snowshoe Hare Physical Data</a></h5>
                     </div>
                 </div>
                 
