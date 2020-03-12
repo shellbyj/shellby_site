@@ -58,7 +58,7 @@ paginate = 10
     weight = 3
     name = "CV"
     url = "pdf/3_johnson_cv.pdf"
-    pre = "<i class='fab fa-2x fa-file-alt'></i>"
+    pre = "<i class='fas fa-2x fa-file-alt'></i>"
 
 [[menu.topbar]]
     weight = 4
@@ -151,7 +151,7 @@ paginate = 10
     # For more informtion take a look at the README.
 
 [params.testimonials]
-    enable = true
+    enable = false
     # All testimonials are defined in their own files. You can find example items
     # at 'exampleSite/data/testimonials'.
     # For more informtion take a look at the README.
